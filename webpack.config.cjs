@@ -1,6 +1,7 @@
 // webpack.config.js
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   mode: "development",
@@ -15,6 +16,14 @@ module.exports = {
     watchFiles: ["./src/template.html"],
   },
   plugins: [
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: "src/assets/condition-icons",
+          to: "assets/condition-icons",
+        },
+      ],
+    }),
     new HtmlWebpackPlugin({
       template: "./src/index.html",
     }),
