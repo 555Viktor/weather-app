@@ -19,8 +19,8 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: "src/assets/condition-icons",
-          to: "assets/condition-icons",
+          from: "src/assets/",
+          to: "assets/",
         },
       ],
     }),
