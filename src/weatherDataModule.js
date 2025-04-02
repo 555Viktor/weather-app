@@ -1,6 +1,6 @@
 // Fetch the weather data from Virtual Crossing API
 // Takes 2 parameters - location for data & unit type (us / metric)
-async function fetchWeatherData(location, unit = "metric") {
+export async function fetchWeatherData(location, unit = "metric") {
   try {
     const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=${unit}&key=A5JKW4ELJQ4BD7SYBQ2CL9N2A`;
     const response = await fetch(url);
@@ -387,7 +387,7 @@ function getFiveDayForecast(data) {
 // -----------------------------------------
 
 // Combine all previous helper functions and get a weather summary object
-function getWeatherSummary(data) {
+export function getWeatherSummary(data) {
   return {
     locationName: getLocationName(data),
     weatherConditions: getWeatherCondition(data),
@@ -416,3 +416,4 @@ function getWeatherSummary(data) {
 
 const londonData = await fetchWeatherData("london");
 const londonDataSummary = getWeatherSummary(londonData);
+// console.log(londonDataSummary)
