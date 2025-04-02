@@ -1,58 +1,3 @@
-/* <div class="weather-details-container">
-      <div class="temp-details-container">
-          <b class="current-temp">
-              24C
-          </b>
-          <p class="feels-like-label">Feels like: <b class="feels-like-temp">22°C</b></p>
-      </div>
-
-      <div class="sun-cycle-details-container">
-          <div class="sun-cycle-details sunrise-details">
-              <img src="./assets/sunrise-icon.svg" alt="" class="sun-cycle-icon">
-              <b class="sunrise-label">Sunrise</b> 
-              <p class="sunrise-time">06:37</p>       
-          </div>
-
-          <div class="sun-cycle-details sunset-details">
-              <img src="./assets/sunset-icon.svg" alt="" class="sun-cycle-icon">
-              <b class="sunset-label">Sunset</b>
-              <p class="sunset-time">20:35</p>
-          </div>
-      </div>
-
-      <div class="weather-icon-details">
-          <img src="./assets/condition-icons/clear-day.svg" alt="" class="weather-condition-icon">
-          <b class="weather-condition-label">Sunny</b>
-      </div>
-
-      <div class="extra-details-container">
-          <div class="extra-details humidity-details">
-              <img src="./assets/humidity-icon.svg" alt="Humidity Icon" class="weather-details-icon humidity-icon">
-              <b class="weather-value humidity-value">Test</b>
-              <p class="weather-label">Humidity</p>
-          </div>
-
-          <div class="extra-details uv-details">
-              <img src="./assets/uv-icon.svg" alt="UV Icon" class="weather-details-icon uv-icon">
-              <b class="weather-value uv-value">Test</b>
-              <p class="weather-label">UV Index</p>
-          </div>
-
-          <div class="extra-details pressure-details">
-              <img src="./assets/pressure-icon.svg" alt="Pressure Icon" class="weather-details-icon pressure-icon">
-              <b class="weather-value pressure-value">Test</b>
-              <p class="weather-label">Pressure</p>
-          </div>
-
-          <div class="extra-details wind-speed-details">
-              <img src="./assets/wind-icon.svg" alt="Wind Speed Icon" class="weather-details-icon wind-speed-icon">
-              <b class="weather-value wind-speed-value">Test</b>
-              <p class="weather-label">Wind Speed</p>
-          </div>
-      </div>
-    </div> 
-*/
-
 // Utility functions for DOM element creation
 function addClass(element, ...classes) {
   if (!element) return;
@@ -234,7 +179,7 @@ export function createWeatherDetailsDom(dataSummary) {
     weatherConditionIconEl,
     weatherConditionLabelEl
   );
-  
+
   // --------------------
   // Extra weather details
 
@@ -341,3 +286,173 @@ export function createWeatherDetailsDom(dataSummary) {
   );
   return weatherDetailsContainer;
 }
+
+export function createFiveDayForecastDom(dataSummary) {
+  if (!dataSummary) return;
+
+  const fiveDayForecastContainer = createDivEl();
+  addClass(fiveDayForecastContainer, "five-day-forecast-container");
+
+  const fiveDayForecastHeader = createH1El();
+  fiveDayForecastHeader.textContent = "5 Day Forecast";
+
+  // Day one
+  const dayOneForecastContainer = createDivEl();
+  addClass(dayOneForecastContainer, "day-forecast");
+
+  const dayOneForecastIcon = createImgEl();
+  addClass(dayOneForecastIcon, "day-forecast-icon");
+  dayOneForecastIcon.src = `./assets/condition-icons/${dataSummary.fiveDayForecast[0].dayConditionIcon}.svg`;
+
+  const dayOneForecastTempValue = createBoldEl();
+  addClass(dayOneForecastTempValue, "day-forecast-temp");
+  dayOneForecastTempValue.textContent =
+    dataSummary.fiveDayForecast[0].dayTemp + "°C";
+
+  const dayOneForecastFormattedDate = createBoldEl();
+  addClass(dayOneForecastFormattedDate, "day-forecast-date");
+  dayOneForecastFormattedDate.textContent =
+    dataSummary.fiveDayForecast[0].dayFormattedFullDate;
+
+  dayOneForecastContainer.append(
+    dayOneForecastIcon,
+    dayOneForecastTempValue,
+    dayOneForecastFormattedDate
+  );
+
+  // Day two
+  const dayTwoForecastContainer = createDivEl();
+  addClass(dayTwoForecastContainer, "day-forecast");
+
+  const dayTwoForecastIcon = createImgEl();
+  addClass(dayTwoForecastIcon, "day-forecast-icon");
+  dayTwoForecastIcon.src = `./assets/condition-icons/${dataSummary.fiveDayForecast[1].dayConditionIcon}.svg`;
+
+  const dayTwoForecastTempValue = createBoldEl();
+  addClass(dayTwoForecastTempValue, "day-forecast-temp");
+  dayTwoForecastTempValue.textContent =
+    dataSummary.fiveDayForecast[1].dayTemp + "°C";
+
+  const dayTwoForecastFormattedDate = createBoldEl();
+  addClass(dayTwoForecastFormattedDate, "day-forecast-date");
+  dayTwoForecastFormattedDate.textContent =
+    dataSummary.fiveDayForecast[1].dayFormattedFullDate;
+
+  dayTwoForecastContainer.append(
+    dayTwoForecastIcon,
+    dayTwoForecastTempValue,
+    dayTwoForecastFormattedDate
+  );
+
+  // Day three
+  const dayThreeForecastContainer = createDivEl();
+  addClass(dayThreeForecastContainer, "day-forecast");
+
+  const dayThreeForecastIcon = createImgEl();
+  addClass(dayThreeForecastIcon, "day-forecast-icon");
+  dayThreeForecastIcon.src = `./assets/condition-icons/${dataSummary.fiveDayForecast[2].dayConditionIcon}.svg`;
+
+  const dayThreeForecastTempValue = createBoldEl();
+  addClass(dayThreeForecastTempValue, "day-forecast-temp");
+  dayThreeForecastTempValue.textContent =
+    dataSummary.fiveDayForecast[2].dayTemp + "°C";
+
+  const dayThreeForecastFormattedDate = createBoldEl();
+  addClass(dayThreeForecastFormattedDate, "day-forecast-date");
+  dayThreeForecastFormattedDate.textContent =
+    dataSummary.fiveDayForecast[2].dayFormattedFullDate;
+
+  dayThreeForecastContainer.append(
+    dayThreeForecastIcon,
+    dayThreeForecastTempValue,
+    dayThreeForecastFormattedDate
+  );
+
+  // Day four
+  const dayFourForecastContainer = createDivEl();
+  addClass(dayFourForecastContainer, "day-forecast");
+
+  const dayFourForecastIcon = createImgEl();
+  addClass(dayFourForecastIcon, "day-forecast-icon");
+  dayFourForecastIcon.src = `./assets/condition-icons/${dataSummary.fiveDayForecast[3].dayConditionIcon}.svg`;
+
+  const dayFourForecastTempValue = createBoldEl();
+  addClass(dayFourForecastTempValue, "day-forecast-temp");
+  dayFourForecastTempValue.textContent =
+    dataSummary.fiveDayForecast[3].dayTemp + "°C";
+
+  const dayFourForecastFormattedDate = createBoldEl();
+  addClass(dayFourForecastFormattedDate, "day-forecast-date");
+  dayFourForecastFormattedDate.textContent =
+    dataSummary.fiveDayForecast[3].dayFormattedFullDate;
+
+  dayFourForecastContainer.append(
+    dayFourForecastIcon,
+    dayFourForecastTempValue,
+    dayFourForecastFormattedDate
+  );
+
+  // Day five
+  const dayFiveForecastContainer = createDivEl();
+  addClass(dayFiveForecastContainer, "day-forecast");
+
+  const dayFiveForecastIcon = createImgEl();
+  addClass(dayFiveForecastIcon, "day-forecast-icon");
+  dayFiveForecastIcon.src = `./assets/condition-icons/${dataSummary.fiveDayForecast[4].dayConditionIcon}.svg`;
+
+  const dayFiveForecastTempValue = createBoldEl();
+  addClass(dayFiveForecastTempValue, "day-forecast-temp");
+  dayFiveForecastTempValue.textContent =
+    dataSummary.fiveDayForecast[4].dayTemp + "°C";
+
+  const dayFiveForecastFormattedDate = createBoldEl();
+  addClass(dayFiveForecastFormattedDate, "day-forecast-date");
+  dayFiveForecastFormattedDate.textContent =
+    dataSummary.fiveDayForecast[4].dayFormattedFullDate;
+
+  dayFiveForecastContainer.append(
+    dayFiveForecastIcon,
+    dayFiveForecastTempValue,
+    dayFiveForecastFormattedDate
+  );
+
+  // ---------------
+  fiveDayForecastContainer.append(
+    dayOneForecastContainer,
+    dayTwoForecastContainer,
+    dayThreeForecastContainer,
+    dayFourForecastContainer,
+    dayFiveForecastContainer
+  );
+
+  return fiveDayForecastContainer;
+}
+
+/* <div class="five-day-forecast-container">
+  <h1>5 Day Forecast</h1>
+  <div class="day-forecast">
+      <img class="day-forecast-icon" src="./assets/condition-icons/cloudy.svg" alt="">
+      <b class="day-forecast-temp">20°C</b>
+      <b class="day-forecast-date">Friday, 1 Sep</b>
+  </div>
+  <div class="day-forecast">
+      <img class="day-forecast-icon img-small" src="./assets/condition-icons/cloudy.svg" alt="">
+      <b class="day-forecast-temp">20°C</b>
+      <b class="day-forecast-date">Friday, 1 Sep</b>
+  </div>
+  <div class="day-forecast">
+      <img class="day-forecast-icon img-small" src="./assets/condition-icons/cloudy.svg" alt="">
+      <b class="day-forecast-temp">20°C</b>
+      <b class="day-forecast-date">Friday, 1 Sep</b>
+  </div>
+  <div class="day-forecast">
+      <img class="day-forecast-icon img-small" src="./assets/condition-icons/cloudy.svg" alt="">
+      <b class="day-forecast-temp">20°C</b>
+      <b class="day-forecast-date">Friday, 1 Sep</b>
+  </div>
+  <div class="day-forecast">
+      <img class="day-forecast-icon img-small" src="./assets/condition-icons/cloudy.svg" alt="">
+      <b class="day-forecast-temp">20°C</b>
+      <b class="day-forecast-date">Friday, 1 Sep</b>
+  </div>
+</div> */

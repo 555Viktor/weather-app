@@ -6,6 +6,7 @@ import {
   createSearchBar,
   createLocationTimeData,
   createWeatherDetailsDom,
+  createFiveDayForecastDom
 } from "./domCreationModule.js";
 
 const docBody = document.querySelector("body");
@@ -24,6 +25,7 @@ searchInput.addEventListener("keyup", async (event) => {
 
   mainContent.append(createLocationTimeData(locationDataSummary));
   mainContent.append(createWeatherDetailsDom(locationDataSummary));
+  mainContent.append(createFiveDayForecastDom(locationDataSummary));
 });
 
 docBody.append(searchBar);
