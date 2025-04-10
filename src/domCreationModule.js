@@ -4,7 +4,7 @@ function addClass(element, ...classes) {
   element.classList.add(...classes);
 }
 
-function createDivEl() {
+export function createDivEl() {
   const divEl = document.createElement("div");
   return divEl;
 }
@@ -416,19 +416,17 @@ export function createWeatherForecastDom(dataSummary) {
   const fiveDayForecastDom = createFiveDayForecastDom(dataSummary);
   const hourlyForecastDom = createHourlyForecastDom(dataSummary);
 
-  mainContentContainer.append(
+  return [
     locationTimeDataDom,
     weatherDetailsDom,
     fiveDayForecastDom,
-    hourlyForecastDom
-  );
-
-  return mainContentContainer;
+    hourlyForecastDom,
+  ];
 }
-
 
 // Reset DOM
 
-function resetDom () {
-
+export function resetMainContent () {
+  const mainContentContainer = document.querySelector('#main-content');
+  mainContentContainer.innerHTML = '';
 }
