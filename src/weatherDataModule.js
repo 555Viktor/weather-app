@@ -414,6 +414,6 @@ export function getWeatherSummary(data) {
   };
 }
 
-const londonData = await fetchWeatherData("london");
+const londonData = await fetchWeatherData("plovdiv");
 const londonDataSummary = getWeatherSummary(londonData);
-// console.log(londonDataSummary)
+console.log(londonData)

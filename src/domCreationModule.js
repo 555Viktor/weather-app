@@ -34,6 +34,7 @@ function createParagraphEl() {
   return paragraphEl;
 }
 // ------------------------------------------------
+
 export function createSearchBar() {
   const searchBarContainer = createDivEl();
   addClass(searchBarContainer, "search-bar-container");
@@ -51,7 +52,7 @@ export function createSearchBar() {
   return searchBarContainer;
 }
 
-export function createLocationTimeData(dataSummary) {
+export function createLocationTimeDataDom(dataSummary) {
   if (!dataSummary) return;
 
   const locationDataSummary = dataSummary;
@@ -296,163 +297,138 @@ export function createFiveDayForecastDom(dataSummary) {
   const fiveDayForecastHeader = createH1El();
   fiveDayForecastHeader.textContent = "5 Day Forecast";
 
-  // Day one
-  const dayOneForecastContainer = createDivEl();
-  addClass(dayOneForecastContainer, "day-forecast");
+  const fiveDayForecastDataContainer = createDivEl();
+  addClass(fiveDayForecastDataContainer, "five-day-forecast-data");
 
-  const dayOneForecastIcon = createImgEl();
-  addClass(dayOneForecastIcon, "day-forecast-icon");
-  dayOneForecastIcon.src = `./assets/condition-icons/${dataSummary.fiveDayForecast[0].dayConditionIcon}.svg`;
+  // Loop through the five day forecast data
+  dataSummary.fiveDayForecast.forEach((forecast, index) => {
+    // Create forecast container for each day
+    const dayForecastContainer = createDivEl();
+    addClass(dayForecastContainer, "day-forecast");
 
-  const dayOneForecastTempValue = createBoldEl();
-  addClass(dayOneForecastTempValue, "day-forecast-temp");
-  dayOneForecastTempValue.textContent =
-    dataSummary.fiveDayForecast[0].dayTemp + "°C";
+    // Icon for the day
+    const dayForecastIcon = createImgEl();
+    addClass(dayForecastIcon, "day-forecast-icon");
+    dayForecastIcon.src = `./assets/condition-icons/${forecast.dayConditionIcon}.svg`;
 
-  const dayOneForecastFormattedDate = createBoldEl();
-  addClass(dayOneForecastFormattedDate, "day-forecast-date");
-  dayOneForecastFormattedDate.textContent =
-    dataSummary.fiveDayForecast[0].dayFormattedFullDate;
+    // Temperature for the day
+    const dayForecastTempValue = createBoldEl();
+    addClass(dayForecastTempValue, "day-forecast-temp");
+    dayForecastTempValue.textContent = `${forecast.dayTemp}°C`;
 
-  dayOneForecastContainer.append(
-    dayOneForecastIcon,
-    dayOneForecastTempValue,
-    dayOneForecastFormattedDate
-  );
+    // Date for the day
+    const dayForecastFormattedDate = createBoldEl();
+    addClass(dayForecastFormattedDate, "day-forecast-date");
+    dayForecastFormattedDate.textContent = forecast.dayFormattedFullDate;
 
-  // Day two
-  const dayTwoForecastContainer = createDivEl();
-  addClass(dayTwoForecastContainer, "day-forecast");
+    // Append elements to the forecast container for each day
+    dayForecastContainer.append(
+      dayForecastIcon,
+      dayForecastTempValue,
+      dayForecastFormattedDate
+    );
 
-  const dayTwoForecastIcon = createImgEl();
-  addClass(dayTwoForecastIcon, "day-forecast-icon");
-  dayTwoForecastIcon.src = `./assets/condition-icons/${dataSummary.fiveDayForecast[1].dayConditionIcon}.svg`;
+    // Append the day's forecast to the overall data container
+    fiveDayForecastDataContainer.append(dayForecastContainer);
+  });
 
-  const dayTwoForecastTempValue = createBoldEl();
-  addClass(dayTwoForecastTempValue, "day-forecast-temp");
-  dayTwoForecastTempValue.textContent =
-    dataSummary.fiveDayForecast[1].dayTemp + "°C";
-
-  const dayTwoForecastFormattedDate = createBoldEl();
-  addClass(dayTwoForecastFormattedDate, "day-forecast-date");
-  dayTwoForecastFormattedDate.textContent =
-    dataSummary.fiveDayForecast[1].dayFormattedFullDate;
-
-  dayTwoForecastContainer.append(
-    dayTwoForecastIcon,
-    dayTwoForecastTempValue,
-    dayTwoForecastFormattedDate
-  );
-
-  // Day three
-  const dayThreeForecastContainer = createDivEl();
-  addClass(dayThreeForecastContainer, "day-forecast");
-
-  const dayThreeForecastIcon = createImgEl();
-  addClass(dayThreeForecastIcon, "day-forecast-icon");
-  dayThreeForecastIcon.src = `./assets/condition-icons/${dataSummary.fiveDayForecast[2].dayConditionIcon}.svg`;
-
-  const dayThreeForecastTempValue = createBoldEl();
-  addClass(dayThreeForecastTempValue, "day-forecast-temp");
-  dayThreeForecastTempValue.textContent =
-    dataSummary.fiveDayForecast[2].dayTemp + "°C";
-
-  const dayThreeForecastFormattedDate = createBoldEl();
-  addClass(dayThreeForecastFormattedDate, "day-forecast-date");
-  dayThreeForecastFormattedDate.textContent =
-    dataSummary.fiveDayForecast[2].dayFormattedFullDate;
-
-  dayThreeForecastContainer.append(
-    dayThreeForecastIcon,
-    dayThreeForecastTempValue,
-    dayThreeForecastFormattedDate
-  );
-
-  // Day four
-  const dayFourForecastContainer = createDivEl();
-  addClass(dayFourForecastContainer, "day-forecast");
-
-  const dayFourForecastIcon = createImgEl();
-  addClass(dayFourForecastIcon, "day-forecast-icon");
-  dayFourForecastIcon.src = `./assets/condition-icons/${dataSummary.fiveDayForecast[3].dayConditionIcon}.svg`;
-
-  const dayFourForecastTempValue = createBoldEl();
-  addClass(dayFourForecastTempValue, "day-forecast-temp");
-  dayFourForecastTempValue.textContent =
-    dataSummary.fiveDayForecast[3].dayTemp + "°C";
-
-  const dayFourForecastFormattedDate = createBoldEl();
-  addClass(dayFourForecastFormattedDate, "day-forecast-date");
-  dayFourForecastFormattedDate.textContent =
-    dataSummary.fiveDayForecast[3].dayFormattedFullDate;
-
-  dayFourForecastContainer.append(
-    dayFourForecastIcon,
-    dayFourForecastTempValue,
-    dayFourForecastFormattedDate
-  );
-
-  // Day five
-  const dayFiveForecastContainer = createDivEl();
-  addClass(dayFiveForecastContainer, "day-forecast");
-
-  const dayFiveForecastIcon = createImgEl();
-  addClass(dayFiveForecastIcon, "day-forecast-icon");
-  dayFiveForecastIcon.src = `./assets/condition-icons/${dataSummary.fiveDayForecast[4].dayConditionIcon}.svg`;
-
-  const dayFiveForecastTempValue = createBoldEl();
-  addClass(dayFiveForecastTempValue, "day-forecast-temp");
-  dayFiveForecastTempValue.textContent =
-    dataSummary.fiveDayForecast[4].dayTemp + "°C";
-
-  const dayFiveForecastFormattedDate = createBoldEl();
-  addClass(dayFiveForecastFormattedDate, "day-forecast-date");
-  dayFiveForecastFormattedDate.textContent =
-    dataSummary.fiveDayForecast[4].dayFormattedFullDate;
-
-  dayFiveForecastContainer.append(
-    dayFiveForecastIcon,
-    dayFiveForecastTempValue,
-    dayFiveForecastFormattedDate
-  );
-
-  // ---------------
+  // Append everything to the main container
   fiveDayForecastContainer.append(
-    dayOneForecastContainer,
-    dayTwoForecastContainer,
-    dayThreeForecastContainer,
-    dayFourForecastContainer,
-    dayFiveForecastContainer
+    fiveDayForecastHeader,
+    fiveDayForecastDataContainer
   );
 
   return fiveDayForecastContainer;
 }
 
-/* <div class="five-day-forecast-container">
-  <h1>5 Day Forecast</h1>
-  <div class="day-forecast">
-      <img class="day-forecast-icon" src="./assets/condition-icons/cloudy.svg" alt="">
-      <b class="day-forecast-temp">20°C</b>
-      <b class="day-forecast-date">Friday, 1 Sep</b>
-  </div>
-  <div class="day-forecast">
-      <img class="day-forecast-icon img-small" src="./assets/condition-icons/cloudy.svg" alt="">
-      <b class="day-forecast-temp">20°C</b>
-      <b class="day-forecast-date">Friday, 1 Sep</b>
-  </div>
-  <div class="day-forecast">
-      <img class="day-forecast-icon img-small" src="./assets/condition-icons/cloudy.svg" alt="">
-      <b class="day-forecast-temp">20°C</b>
-      <b class="day-forecast-date">Friday, 1 Sep</b>
-  </div>
-  <div class="day-forecast">
-      <img class="day-forecast-icon img-small" src="./assets/condition-icons/cloudy.svg" alt="">
-      <b class="day-forecast-temp">20°C</b>
-      <b class="day-forecast-date">Friday, 1 Sep</b>
-  </div>
-  <div class="day-forecast">
-      <img class="day-forecast-icon img-small" src="./assets/condition-icons/cloudy.svg" alt="">
-      <b class="day-forecast-temp">20°C</b>
-      <b class="day-forecast-date">Friday, 1 Sep</b>
-  </div>
-</div> */
+export function createHourlyForecastDom(dataSummary) {
+  if (!dataSummary) return;
+
+  const hourlyForecastContainer = createDivEl();
+  addClass(hourlyForecastContainer, "hourly-forecast-container");
+
+  const hourlyForecastHeaderEl = createH1El();
+  hourlyForecastHeaderEl.textContent = "Hourly Forecast";
+
+  const hourlyForecastDataContainer = createDivEl();
+  addClass(hourlyForecastDataContainer, "hourly-forecast-data");
+
+  for (let i = 0; i < dataSummary.todayHourlyForecast.length; i++) {
+    const hourForecast = dataSummary.todayHourlyForecast[i];
+
+    // Create hour forecast container
+    const hourForecastContainer = createDivEl();
+    addClass(hourForecastContainer, "hour-forecast");
+
+    // Time
+    const hourValueEl = createBoldEl();
+    addClass(hourValueEl, "hour-forecast-time");
+    hourValueEl.textContent = hourForecast.hourTimeFormatted;
+
+    // Condition icon
+    const hourIconEl = createImgEl();
+    addClass(hourIconEl, "hour-forecast-icon");
+    hourIconEl.src = `./assets/condition-icons/${hourForecast.hourConditionIcon}.svg`;
+
+    // Temperature
+    const hourTempValueEl = createBoldEl();
+    addClass(hourTempValueEl, "hour-forecast-temp");
+    hourTempValueEl.textContent = hourForecast.hourTemp + "°C";
+
+    //Wind Speed Icon
+    const windSpeedIconEl = createImgEl();
+    addClass(windSpeedIconEl, "hour-forecast-wind-icon");
+    windSpeedIconEl.src = "./assets/wind-icon.svg";
+    windSpeedIconEl.alt = "Wind Speed Icon";
+
+    // Wind Speed
+    const hourWindSpeedValueEl = createBoldEl();
+    addClass(hourWindSpeedValueEl, "hour-forecast-windspeed");
+    hourWindSpeedValueEl.textContent = hourForecast.hourWindSpeed + "km/h";
+
+    hourForecastContainer.append(
+      hourValueEl,
+      hourIconEl,
+      hourTempValueEl,
+      windSpeedIconEl,
+      hourWindSpeedValueEl
+    );
+
+    hourlyForecastDataContainer.append(hourForecastContainer);
+  }
+
+  hourlyForecastContainer.append(
+    hourlyForecastHeaderEl,
+    hourlyForecastDataContainer
+  );
+
+  return hourlyForecastContainer;
+}
+
+export function createWeatherForecastDom(dataSummary) {
+  if (!dataSummary) return;
+
+  const mainContentContainer = createDivEl();
+  mainContentContainer.id = "main-content";
+
+  const locationTimeDataDom = createLocationTimeDataDom(dataSummary);
+  const weatherDetailsDom = createWeatherDetailsDom(dataSummary);
+  const fiveDayForecastDom = createFiveDayForecastDom(dataSummary);
+  const hourlyForecastDom = createHourlyForecastDom(dataSummary);
+
+  mainContentContainer.append(
+    locationTimeDataDom,
+    weatherDetailsDom,
+    fiveDayForecastDom,
+    hourlyForecastDom
+  );
+
+  return mainContentContainer;
+}
+
+
+// Reset DOM
+
+function resetDom () {
+
+}

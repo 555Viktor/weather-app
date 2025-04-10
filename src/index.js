@@ -4,16 +4,18 @@ import { fetchWeatherData, getWeatherSummary } from "./weatherDataModule.js";
 
 import {
   createSearchBar,
-  createLocationTimeData,
+  createLocationTimeDataDom,
   createWeatherDetailsDom,
-  createFiveDayForecastDom
+  createFiveDayForecastDom,
+  createHourlyForecastDom,
+  createWeatherForecastDom,
+  createDivEl,
 } from "./domCreationModule.js";
 
 const docBody = document.querySelector("body");
 const mainContent = docBody.querySelector("#main-content");
 const searchBar = createSearchBar();
 const searchInput = searchBar.querySelector(".input-search");
-const timeData = createLocationTimeData();
 
 searchInput.addEventListener("keyup", async (event) => {
   if (event.key !== "Enter") return;
@@ -23,9 +25,7 @@ searchInput.addEventListener("keyup", async (event) => {
   const locationData = await fetchWeatherData(userInput);
   const locationDataSummary = getWeatherSummary(locationData);
 
-  mainContent.append(createLocationTimeData(locationDataSummary));
-  mainContent.append(createWeatherDetailsDom(locationDataSummary));
-  mainContent.append(createFiveDayForecastDom(locationDataSummary));
+  docBody.append(createWeatherForecastDom(locationDataSummary));
 });
 
 docBody.append(searchBar);
