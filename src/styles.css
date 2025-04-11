@@ -29,7 +29,6 @@ body {
 
 /* Shared styles */
 .search-bar-container,
-.day-forecast,
 .hourly-forecast-data,
 .hourly-forecast-container .hour-forecast {
     display: flex;
@@ -47,7 +46,8 @@ body {
 #main-content,
 .weather-details-container,
 .weather-details-container .sun-cycle-details,
-.weather-details-container .extra-details-container {
+.weather-details-container .extra-details-container,
+.day-forecast {
     display: grid;
 }
 
@@ -225,24 +225,20 @@ body {
 }
 
 .five-day-forecast-container .day-forecast {
-    width: 20rem;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, auto);
 
-    justify-content: space-around;
-    align-items: center;
-
-    margin-block: 0.5rem;
-    margin-inline: 0.5rem;
-
-    font-size: 1.2rem;
-}
-
-.day-forecast>*{
-    margin-inline: 0.5rem;
+    font-size: 1.2rem; 
 }
 
 .day-forecast .day-forecast-icon {
     width: 2rem;
     height: 2rem;
+}
+
+.day-forecast .day-forecast-date {
+    grid-column: span 2 / span 2;
+    text-align: center;
 }
 
 /* Hourly forecast styling */
