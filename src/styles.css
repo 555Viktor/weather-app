@@ -96,8 +96,12 @@ body {
     grid-row: span 3 / span 3;
 }
 
-.location-time-data-container .location-time {
-    font-size: 4rem;
+.location-time-data-container .location-name {
+    font-size: 3rem;
+}
+
+.location-time-data-container .location-date {
+    font-size: 1.2rem;
 }
 
 /* Weather details container styling */

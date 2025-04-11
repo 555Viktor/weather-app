@@ -64,17 +64,12 @@ function createLocationTimeDataDom(dataSummary) {
   addClass(locationNameHeader, "location-name");
   locationNameHeader.textContent = locationDataSummary.locationName;
 
-  const locationCurrentTimeEl = createBoldEl();
-  addClass(locationCurrentTimeEl, "location-time");
-  locationCurrentTimeEl.textContent = locationDataSummary.localTime;
-
   const locationCurrentDateEl = createParagraphEl();
   addClass(locationCurrentDateEl, "location-date");
   locationCurrentDateEl.textContent = locationDataSummary.formattedFullDate;
 
   timeDataContainer.append(
     locationNameHeader,
-    locationCurrentTimeEl,
     locationCurrentDateEl
   );
 

@@ -152,28 +152,6 @@ function getUvIndex(data) {
   }
 }
 
-function getLocalTime(data) {
-  try {
-    validateWeatherData(data);
-
-    const locationData = data;
-    const timezoneOffset = locationData.tzoffset;
-
-    if (timezoneOffset === undefined) {
-      throw new Error("Timezone offset missing");
-    }
-
-    const timezoneOffsetMs = timezoneOffset * 3600 * 1000;
-    const nowUtc = new Date(Date.now()); // Current UTC time
-    const localTime = new Date(nowUtc.getTime() + timezoneOffsetMs);
-    const localTimeFormatted = formatDateHoursMinutes(localTime);
-
-    return localTimeFormatted;
-  } catch (err) {
-    handleError(err);
-  }
-}
-
 function getLocalDateFormatted(data) {
   try {
     validateWeatherData(data);
@@ -220,20 +198,20 @@ function formatDateToWeekday(date) {
   }
 }
 
-function formatDateHoursMinutes(date) {
-  try {
-    validateDate(date);
+// function formatDateHoursMinutes(date) {
+//   try {
+//     validateDate(date);
 
-    const formattedTime = date.toLocaleTimeString("en-GB", {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
+//     const formattedTime = date.toLocaleTimeString("en-GB", {
+//       hour: "2-digit",
+//       minute: "2-digit",
+//     });
 
-    return formattedTime;
-  } catch (err) {
-    handleError(err);
-  }
-}
+//     return formattedTime;
+//   } catch (err) {
+//     handleError(err);
+//   }
+// }
 
 function getLocalWeekday(data) {
   try {
@@ -405,7 +383,6 @@ export function getWeatherSummary(data) {
       data
     )}`,
 
-    localTime: getLocalTime(data),
     sunriseTime: getSunriseTime(data),
     sunsetTime: getSunsetTime(data),
 
@@ -416,4 +393,4 @@ export function getWeatherSummary(data) {
 
 const londonData = await fetchWeatherData("plovdiv");
 const londonDataSummary = getWeatherSummary(londonData);
-console.log(londonData)
+console.log(londonDataSummary)
