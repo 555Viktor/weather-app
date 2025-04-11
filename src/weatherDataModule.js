@@ -164,7 +164,7 @@ function getLocalTime(data) {
     }
 
     const timezoneOffsetMs = timezoneOffset * 3600 * 1000;
-    const nowUtc = new Date(); // Current UTC time
+    const nowUtc = new Date(Date.now()); // Current UTC time
     const localTime = new Date(nowUtc.getTime() + timezoneOffsetMs);
     const localTimeFormatted = formatDateHoursMinutes(localTime);
 

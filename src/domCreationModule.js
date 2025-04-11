@@ -33,8 +33,8 @@ function createParagraphEl() {
   const paragraphEl = document.createElement("p");
   return paragraphEl;
 }
-// ------------------------------------------------
 
+// Functions to create weather data components
 export function createSearchBar() {
   const searchBarContainer = createDivEl();
   addClass(searchBarContainer, "search-bar-container");
@@ -52,7 +52,7 @@ export function createSearchBar() {
   return searchBarContainer;
 }
 
-export function createLocationTimeDataDom(dataSummary) {
+function createLocationTimeDataDom(dataSummary) {
   if (!dataSummary) return;
 
   const locationDataSummary = dataSummary;
@@ -81,15 +81,7 @@ export function createLocationTimeDataDom(dataSummary) {
   return timeDataContainer;
 }
 
-export function createWeatherDetailsDom(dataSummary) {
-  if (!dataSummary) return;
-
-  const weatherDetailsContainer = createDivEl();
-  addClass(weatherDetailsContainer, "weather-details-container");
-
-  // --------------------
-  // Temp details
-
+function createTempDetailsDom(dataSummary) {
   const tempDetailsContainer = createDivEl();
   addClass(tempDetailsContainer, "temp-details-container");
 
@@ -115,9 +107,10 @@ export function createWeatherDetailsDom(dataSummary) {
     locationFeelsLikeTempLabelEl
   );
 
-  // --------------------
-  // Sun cycle details
+  return tempDetailsContainer;
+}
 
+function createSunCycleDetailsDom(dataSummary) {
   const sunCycleDetailsContainer = createDivEl();
   addClass(sunCycleDetailsContainer, "sun-cycle-details-container");
 
@@ -162,8 +155,10 @@ export function createWeatherDetailsDom(dataSummary) {
     sunsetDetailsContainer
   );
 
-  // --------------------
-  // Weather icon details
+  return sunCycleDetailsContainer;
+}
+
+function createWeatherIconDetailsDom(dataSummary) {
   const weatherIconDetailsContainer = createDivEl();
   addClass(weatherIconDetailsContainer, "weather-icon-details");
 
@@ -181,9 +176,10 @@ export function createWeatherDetailsDom(dataSummary) {
     weatherConditionLabelEl
   );
 
-  // --------------------
-  // Extra weather details
+  return weatherIconDetailsContainer;
+}
 
+function createExtraWeatherDetailsDom(dataSummary) {
   const extraDetailsContainer = createDivEl();
   addClass(extraDetailsContainer, "extra-details-container");
 
@@ -278,17 +274,31 @@ export function createWeatherDetailsDom(dataSummary) {
     windSpeedDetailsContainer
   );
 
-  // --------------------
+  return extraDetailsContainer;
+}
+
+function createWeatherDetailsDom(dataSummary) {
+  if (!dataSummary) return;
+
+  const weatherDetailsContainer = createDivEl();
+  addClass(weatherDetailsContainer, "weather-details-container");
+
+  const tempDetailsContainer = createTempDetailsDom(dataSummary);
+  const sunCycleDetailsContainer = createSunCycleDetailsDom(dataSummary);
+  const weatherIconDetailsContainer = createWeatherIconDetailsDom(dataSummary);
+  const extraDetailsContainer = createExtraWeatherDetailsDom(dataSummary);
+
   weatherDetailsContainer.append(
     tempDetailsContainer,
     sunCycleDetailsContainer,
     weatherIconDetailsContainer,
     extraDetailsContainer
   );
+
   return weatherDetailsContainer;
 }
 
-export function createFiveDayForecastDom(dataSummary) {
+function createFiveDayForecastDom(dataSummary) {
   if (!dataSummary) return;
 
   const fiveDayForecastContainer = createDivEl();
@@ -332,7 +342,7 @@ export function createFiveDayForecastDom(dataSummary) {
     fiveDayForecastDataContainer.append(dayForecastContainer);
   });
 
-  // Append everything to the main container
+  // Append everything to main container
   fiveDayForecastContainer.append(
     fiveDayForecastHeader,
     fiveDayForecastDataContainer
@@ -341,7 +351,7 @@ export function createFiveDayForecastDom(dataSummary) {
   return fiveDayForecastContainer;
 }
 
-export function createHourlyForecastDom(dataSummary) {
+function createHourlyForecastDom(dataSummary) {
   if (!dataSummary) return;
 
   const hourlyForecastContainer = createDivEl();
@@ -405,6 +415,7 @@ export function createHourlyForecastDom(dataSummary) {
   return hourlyForecastContainer;
 }
 
+// Function that combines creation of all weather data components
 export function createWeatherForecastDom(dataSummary) {
   if (!dataSummary) return;
 
@@ -424,9 +435,8 @@ export function createWeatherForecastDom(dataSummary) {
   ];
 }
 
-// Reset DOM
-
-export function resetMainContent () {
-  const mainContentContainer = document.querySelector('#main-content');
-  mainContentContainer.innerHTML = '';
+// Reset forecast content
+export function resetMainContent() {
+  const mainContentContainer = document.querySelector("#main-content");
+  mainContentContainer.innerHTML = "";
 }
