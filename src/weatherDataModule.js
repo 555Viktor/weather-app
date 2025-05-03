@@ -390,7 +390,3 @@ export function getWeatherSummary(data) {
     fiveDayForecast: getFiveDayForecast(data),
   };
 }
-
-const londonData = await fetchWeatherData("plovdiv");
-const londonDataSummary = getWeatherSummary(londonData);
-console.log(londonDataSummary)
