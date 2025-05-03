@@ -306,7 +306,7 @@ function createFiveDayForecastDom(dataSummary) {
   addClass(fiveDayForecastDataContainer, "five-day-forecast-data");
 
   // Loop through the five day forecast data
-  dataSummary.fiveDayForecast.forEach((forecast, index) => {
+  dataSummary.fiveDayForecast.forEach((forecast) => {
     // Create forecast container for each day
     const dayForecastContainer = createDivEl();
     addClass(dayForecastContainer, "day-forecast");
@@ -315,7 +315,8 @@ function createFiveDayForecastDom(dataSummary) {
     const dayForecastIcon = createImgEl();
     addClass(dayForecastIcon, "day-forecast-icon");
     dayForecastIcon.src = `./assets/condition-icons/${forecast.dayConditionIcon}.svg`;
-
+    dayForecastIcon.icon = forecast.dayConditionIcon; // Use icon name as alt description
+  
     // Temperature for the day
     const dayForecastTempValue = createBoldEl();
     addClass(dayForecastTempValue, "day-forecast-temp");
@@ -374,8 +375,8 @@ function createHourlyForecastDom(dataSummary) {
     const hourIconEl = createImgEl();
     addClass(hourIconEl, "hour-forecast-icon");
     hourIconEl.src = `./assets/condition-icons/${hourForecast.hourConditionIcon}.svg`;
-    hourIconEl.alt = hourForecast.hourConditionIcon;
-    
+    hourIconEl.alt = hourForecast.hourConditionIcon; // Use icon name as alt description
+
     // Temperature
     const hourTempValueEl = createBoldEl();
     addClass(hourTempValueEl, "hour-forecast-temp");
