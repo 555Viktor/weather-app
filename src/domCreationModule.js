@@ -374,7 +374,8 @@ function createHourlyForecastDom(dataSummary) {
     const hourIconEl = createImgEl();
     addClass(hourIconEl, "hour-forecast-icon");
     hourIconEl.src = `./assets/condition-icons/${hourForecast.hourConditionIcon}.svg`;
-
+    hourIconEl.alt = hourForecast.hourConditionIcon;
+    
     // Temperature
     const hourTempValueEl = createBoldEl();
     addClass(hourTempValueEl, "hour-forecast-temp");
